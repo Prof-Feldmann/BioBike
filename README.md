@@ -20,9 +20,9 @@ Helmholtz-scanner measurements of permanent magnets from an e-bike motor rotor, 
 │   ├── ...
 │   └── Feldmann2_14.txt                      # used (in-service) magnet 14
 ├── scripts/
-│   ├── Plot_Rotor_Publ_Lanz_002_250302_pub.m # rotor surface visualisation
-│   ├── helmholtz_diff_analysis_pub.m         # pulsed–used difference analysis
-│   └── convert_helmholtz_to_images_pub.m     # txt → PNG conversion + overviews
+│   ├── Plot_Rotor_Publ_Lanz_v002_250302.m # rotor surface visualisation
+│   ├── helmholtz_diff_analysis_v001_260511_pub.m         # pulsed–used difference analysis
+│   └── convert_helmholtz_to_images_pub_v001_260511.m     # txt → PNG conversion + overviews
 └── README.md
 ```
 
