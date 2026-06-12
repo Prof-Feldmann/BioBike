@@ -1,0 +1,14 @@
+# MATLAB
+*.asv
+*.mex*
+slprj/
+diff_analysis/
+images_pulsed_axes/
+images_pulsed_raw/
+images_used_axes/
+images_used_raw/
+Fig_*.png
+overview_*.png
+# OS junk
+.DS_Store
+Thumbs.db
