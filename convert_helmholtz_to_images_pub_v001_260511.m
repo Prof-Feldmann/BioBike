@@ -1,3 +1,11 @@
+%  PROJECT
+%  -------
+%  Supplementary material to:
+%      Feldmann, S. et al. (2026). "<Non-Destructive Quality Assessment of Permanent Magnets in
+%      Pedelec Drive Systems via Magnetic Field Mapping and Support
+%      Vector Machine Classification>",
+%      Springer Nature, Vol(Issue), pp. xxx-xxx. DOI: 10.xxxx/xxxxx
+%  Repository: https://github.com/<USERNAME>/BioBike
 %% convert_helmholtz_to_images.m  (Publication-ready v3 - oversize fonts)
 % Converts Helmholtz scan .txt files (one per magnet) into PNG images,
 % with and without axes/colorbar. Also builds overview figures.

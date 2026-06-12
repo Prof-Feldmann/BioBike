@@ -1,3 +1,12 @@
+%  PROJECT
+%  -------
+%  Supplementary material to:
+%      Feldmann, S. et al. (2026). "<Non-Destructive Quality Assessment of Permanent Magnets in
+%      Pedelec Drive Systems via Magnetic Field Mapping and Support
+%      Vector Machine Classification>",
+%      Springer Nature, Vol(Issue), pp. xxx-xxx. DOI: 10.xxxx/xxxxx
+%  Repository: https://github.com/<USERNAME>/BioBike
+
 %% helmholtz_diff_analysis.m  (Publication-ready)
 % Difference analysis: pulsed (freshly re-magnetised) vs. used (in-service)
 % rotor magnets, based on Helmholtz scan data.
