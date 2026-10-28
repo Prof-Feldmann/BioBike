@@ -3,7 +3,10 @@
 Helmholtz-scanner measurements of permanent magnets from an e-bike motor rotor, captured before and after in-service operation. This repository contains the raw measurement data and the MATLAB scripts used to generate the figures published in the accompanying paper.
 
 > **Citation placeholder.** If you use this dataset, please cite:
-> _Feldmann et al. (year). Title. Journal, Vol(Issue), Pages. DOI:_ `<add DOI here>`
+> _Feldmann et al. 2026. REAL-TIME DRIVER-IN-THE-LOOP SIMULATION
+FOR PEDELEC DRIVETRAIN TESTING: A DIGITAL
+TWIN APPROACH USING MATLAB/SIMULINK AND
+SPEEDGOAT HARDWARE. Journal, International Journal of Computer Science & Information Technology (IJCSIT), Vol 8. DOI:10.5121/ijcsit.2026.18302
 
 ---
 
@@ -183,12 +186,12 @@ The publication figures are produced bit-for-bit by the scripts as supplied. Ran
 
 ## License
 
-`<TODO: choose and add a license — typical choices for research data are CC-BY-4.0 for the data and MIT or BSD-3-Clause for the scripts. Add the corresponding LICENSE file at the repo root.>`
+CC-BY-4.0 LICENSE 
 
 ---
 
 ## Contact
 
-`<TODO: name, institution, email>`
+Prof. Dr.-Ing. Sebastian Feldmann, Aalen University, Germany, Mail: Sebastian.Feldmann@HS-Aalen.de
 
 Issues and pull requests are welcome through the GitHub issue tracker.
