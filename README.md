@@ -1,197 +1,147 @@
-# Rotor Magnet Hysteresis Dataset
+# BioBike — Magnetic Field Mapping of Pedelec Drive Magnets
 
-Helmholtz-scanner measurements of permanent magnets from an e-bike motor rotor, captured before and after in-service operation. This repository contains the raw measurement data and the MATLAB scripts used to generate the figures published in the accompanying paper.
+Measurement data and MATLAB scripts accompanying the article
 
-> **Citation placeholder.** If you use this dataset, please cite:
-> _Feldmann et al. 2026. REAL-TIME DRIVER-IN-THE-LOOP SIMULATION
-FOR PEDELEC DRIVETRAIN TESTING: A DIGITAL
-TWIN APPROACH USING MATLAB/SIMULINK AND
-SPEEDGOAT HARDWARE. Journal, International Journal of Computer Science & Information Technology (IJCSIT), Vol 8. DOI:10.5121/ijcsit.2026.18302
+> S. Feldmann, M. Lanz, M. Wiedenmann:
+> **Non-Destructive Quality Assessment of Permanent Magnets in Pedelec Drive
+> Systems via Magnetic Field Mapping and Support Vector Machine Classification.**
+> Aalen University, 2026 (submitted). DOI: _to be added after acceptance_
 
----
-
-## Repository structure
-
-```
-.
-├── data/
-│   ├── Rotor_slice.txt                       # full 360° rotor scan (13 axial slices)
-│   ├── Feldmann_aufmagnetisiert_1.txt        # pulsed (re-magnetised) magnet 1
-│   ├── ...
-│   ├── Feldmann_aufmagnetisiert_14.txt       # pulsed (re-magnetised) magnet 14
-│   ├── Feldmann2_1.txt                       # used (in-service) magnet 1
-│   ├── ...
-│   └── Feldmann2_14.txt                      # used (in-service) magnet 14
-├── scripts/
-│   ├── Plot_Rotor_Publ_Lanz_002_250302_pub.m # rotor surface visualisation
-│   ├── helmholtz_diff_analysis_pub.m         # pulsed–used difference analysis
-│   └── convert_helmholtz_to_images_pub.m     # txt → PNG conversion + overviews
-└── README.md
-```
-
-The `scripts/` folder produces all figures used in the publication directly from the contents of `data/`. No additional input files are required.
+The 14 NdFeB permanent magnets from the rotor of a **daum electronic Impulse2**
+pedelec centre-drive (PMSM) were scanned with a three-axis Hall field mapper
+twice. The first scan was after **5,000 km of endurance testing** on the
+biomechanical Hardware-in-the-Loop e-bike test bench at Aalen University
+(*degraded* state). The second was after **pulse re-magnetisation** (*fully
+magnetised* reference state). The paired difference field maps show localised
+demagnetisation of 0.3–7.6 mT, mainly at the magnet edges.
 
 ---
 
-## Measurement set-up
+## Repository contents
 
-| Item | Specification |
+All files are in the repository root. The scripts expect the data files in the
+MATLAB working directory.
+
+| File(s) | Content | Paper |
+|---|---|---|
+| `Feldmann_aufmagnetisiert_1.txt` … `_14.txt` | Area scans of magnets M1–M14, **fully magnetised** (reference) state | Sect. 2.3, 3 |
+| `Feldmann2_1.txt` … `Feldmann2_14.txt` | Area scans of magnets M1–M14, **degraded** state after 5,000 km | Sect. 2.3, 3 |
+| `Rotor_slice.txt` | Full 360° scan of the assembled rotor, 13 axial slices | Rotor figures |
+| `Rotor_slice_2.txt` | Repeat of the 13-slice rotor scan (same set-up, 14 min later) | – |
+| `Rotor.txt` | Single-slice 360° rotor scan (preliminary) | – |
+| `convert_helmholtz_to_images_pub_v001_260511.m` | Converts the magnet scans into field-map images (step 1) | Field-map figures |
+| `helmholtz_diff_analysis_v001_260511_pub.m` | Difference fields ΔB = B_magnetised − B_degraded, histograms, degradation ranking (step 2) | Degradation figures |
+| `Plot_Rotor_Publ_Lanz_v002_250302.m` | Rotor surface field maps from `Rotor_slice.txt` | Rotor figures |
+| `LICENSE` | CC0 1.0 (data) | |
+| `LICENSE-CODE` | MIT (scripts) | |
+| `DISCLAIMER.md` | Terms of use | |
+
+Files with the same index form a pair: `Feldmann_aufmagnetisiert_n.txt` ↔
+`Feldmann2_n.txt` is magnet M*n* before/after re-magnetisation.
+
+---
+
+## Measurement set-up (paper, Table 1)
+
+| Parameter | Value |
 |---|---|
-| Sensor system | SENIS MMS-1A-RS three-axis Hall scanner |
-| Mode | Diameter (Helmholtz) mode |
-| Test rig | daum electronic Impulse2 ergometer rotor |
-| Angular resolution | 0.1° (3601 samples per full revolution) |
-| Axial slices (rotor scan) | 13 |
-| Number of magnets per rotor | 14 |
-| Field unit | mT |
-| Position unit | mm |
-| Temperature recorded | yes (probe temperature, last column) |
-
-The rotor consists of 14 surface-mounted permanent magnets distributed evenly around the circumference (one magnet every 360 / 14 ≈ 25.71°).
+| Gaussmeter | SENIS MMS-1A-RS, three-axis Hall field mapper |
+| Hall probe | SENIS AG #382-18, measurement range 1500 mT |
+| Magnet scans | Transition mode (area scan), 24 mm × 14 mm per magnet, 250 µm resolution, 8 mm/s |
+| Rotor scans | Diameter mode, 0.1° angular resolution, 360°, 13 axial slices (1 mm pitch), radius 20.95 mm, 15 °/s |
+| Coordinate system | FSV tool (magnets), rotary table (rotor) |
+| Filter | ON, 1500 mT |
+| Magnets | 14 × NdFeB, approx. 24 × 14 × 3 mm, > 300 mT peak surface flux density |
+| Re-magnetisation | Pulse magnetiser M-K-O1020A, Magnet-Physik, Cologne |
+| Endurance test | 5,000 km, five-stage load collective, 500 W (pedal + motor), 50–100 rpm |
+| Measurement dates | Rotor: 27 Jan 2021 · degraded magnets: 25 Feb 2021 · re-magnetised magnets: 26 Feb 2021 |
 
 ---
 
-## Dataset description
+## File format
 
-### 1. `Rotor_slice.txt` — full rotor scan
+All `.txt` files are raw exports of the SENIS MMS software:
 
-Single tab-separated file containing a 360° scan of the assembled rotor, repeated for 13 axial positions Z. Header lines are bracketed by `***` blocks; numeric data starts after the second `***` block.
+* A text header between two lines of `****` holds the scan settings, probe
+  offsets, start position and calibration date. Then come one line of column
+  names and one blank units line.
+* Data: tab-separated, fixed width, point as decimal separator.
+* Encoding: ISO-8859-1 (Windows-1252), Windows line endings (CRLF).
 
-Columns (1-based, tab-separated):
-
-| # | Name | Unit | Description |
+| # | Column | Unit | Description |
 |---|---|---|---|
-| 1  | Slice         | –     | Slice index (1…13)                         |
-| 2  | Line          | –     | Sample index within slice                  |
-| 3  | X             | mm    | Sensor X position                          |
-| 4  | Y             | mm    | Sensor Y position                          |
-| 5  | Z             | mm    | Sensor Z position (axial)                  |
-| 6  | Rotation      | deg   | Rotor rotation angle (0…360°)              |
-| 7  | Bx            | mT    | Magnetic flux density, X component         |
-| 8  | By            | mT    | Magnetic flux density, Y component         |
-| 9  | Bz            | mT    | Magnetic flux density, Z component         |
-| 10 | RotEnc        | deg   | Rotary encoder reading                     |
-| 11 | Bxy           | mT    | √(Bx² + By²)                               |
-| 12 | Btot          | mT    | √(Bx² + By² + Bz²) — total flux density    |
-| 13 | AngleError    | deg   | Mechanical–encoder angle deviation         |
-| 14 | Direction     | –     | Scan direction flag                        |
-| 15 | R             | mm    | Radial position                            |
-| 16 | Z             | mm    | Axial position (post-processed)            |
-| 17 | Theta         | deg   | Polar angle                                |
-| 18 | ProbeTemp     | °C    | Hall probe temperature                     |
+| 1 | Slice | – | Slice index (rotor scans: 1…13) |
+| 2 | Line | – | Scan line index |
+| 3 | X | mm | Probe X position |
+| 4 | Y | mm | Probe Y position |
+| 5 | Z | mm | Probe Z position |
+| 6 | Rotation | deg | Rotary table angle |
+| 7–9 | Bx, By, Bz | mT | Flux density components |
+| 10 | Rot. Enc | steps | Rotary encoder |
+| 11 | Bxy | mT | √(Bx² + By²) |
+| 12 | Btot | mT | √(Bx² + By² + Bz²), the total flux density used in the paper |
+| 13 | Angle error | deg | Encoder angle deviation |
+| 14 | Direction | – | Scan direction |
+| 15 … | R, Z, Theta, probe temperature | mm, mm, deg, °C | Additional columns (rotor scans) |
 
-### 2. `Feldmann_aufmagnetisiert_*.txt` — pulsed magnets (reference state)
-
-Individual scans of each of the 14 magnets **immediately after pulse re-magnetisation**, i.e. the reference / as-new state. File index `*` ranges from 1 to 14 and matches the magnet position used in `Rotor_slice.txt`.
-
-Same column layout as `Rotor_slice.txt`. The scripts in this repository use only columns **3 (X)**, **4 (Y)** and **12 (Btot)**.
-
-### 3. `Feldmann2_*.txt` — used magnets (in-service state)
-
-Scans of the same 14 magnets **after in-service operation** on the test rig. File index `*` from 1 to 14, magnet position identical to the pulsed dataset, so files with the same index form a paired comparison.
-
-Identical column layout.
-
-The pair `(Feldmann_aufmagnetisiert_n.txt, Feldmann2_n.txt)` is the basis for the per-magnet degradation analysis.
+The magnet analysis uses columns 3 (X), 4 (Y) and 12 (Btot).
 
 ---
 
-## MATLAB scripts
+## Reproducing the figures
 
-All three scripts share a common `PUB` style struct at the top defining fonts, sizes and line widths. Change values there to retune appearance globally; everything downstream picks the new values up.
-
-### `Plot_Rotor_Publ_Lanz_002_250302_pub.m`
-
-Reads `Rotor_slice.txt` and produces three publication figures:
-
-| Output PNG | Content |
-|---|---|
-| `Fig_Rotor_FieldMap_Unwrapped.png` | Unwrapped rotor surface heat-map (θ, Z, B_tot) plus a representative circumferential profile |
-| `Fig_Rotor_PolarView.png`          | Polar cross-section view, radial axis encodes axial slice |
-| `Fig_Rotor_Combined.png`           | Combined publication figure with panels (a)–(c) and all 14 magnet labels |
-
-Also prints per-magnet mean B_tot for the mid-slice to the console.
-
-### `helmholtz_diff_analysis_pub.m`
-
-Computes the pairwise difference field ΔB_tot = B_pulsed − B_used for each of the 14 magnets and produces:
-
-| Output PNG | Content |
-|---|---|
-| `diff_images_all.png`         | 2 × 7 grid of difference fields with shared colour scale |
-| `diff_rgb_all.png`            | RGB difference of the raw colour-map images |
-| `histograms_per_magnet.png`   | Per-magnet ΔB_tot probability histograms |
-| `histogram_overlay_all.png`   | All 14 distributions overlaid in one panel |
-| `degradation_ranking.png`     | Bar chart of |⟨ΔB_tot⟩| ranked worst → best |
-
-Results are written to `./diff_analysis/`. A summary table is printed to the console.
-
-### `convert_helmholtz_to_images_pub.m`
-
-Utility step: reads each per-magnet `*.txt` file and converts it to PNG.
-
-| Output folder | Content |
-|---|---|
-| `images_pulsed_axes/` | Per-magnet pulsed PNG with axes, colorbar, title |
-| `images_pulsed_raw/`  | Per-magnet pulsed PNG, image only (no axes) |
-| `images_used_axes/`   | Per-magnet used PNG with axes, colorbar, title |
-| `images_used_raw/`    | Per-magnet used PNG, image only (no axes) |
-
-The `*_raw/` images are the input for the RGB-difference panel in `helmholtz_diff_analysis_pub.m`, so this script should be run **before** the difference analysis.
-
----
-
-## Quick start
-
-Tested with **MATLAB R2021a or newer**. No additional toolboxes are required beyond the base product and Image Processing Toolbox (used for `imresize` and `imshow`).
+Requires **MATLAB R2021a or newer** with the **Image Processing Toolbox**.
 
 ```matlab
-% 1) Clone the repo, then in MATLAB:
-cd <path-to-repo>
-addpath('scripts');
-cd('data');
+cd <path-to>/BioBike                 % repository root = working directory
 
-% 2) Generate per-magnet PNG images (do this once)
-convert_helmholtz_to_images_pub
-
-% 3) Difference analysis (pulsed vs. used)
-helmholtz_diff_analysis_pub
-
-% 4) Rotor surface figures
-Plot_Rotor_Publ_Lanz_002_250302_pub
+convert_helmholtz_to_images_pub_v001_260511   % 1) field-map images  -> images_*/ , overview_*.png
+helmholtz_diff_analysis_v001_260511_pub       % 2) difference analysis -> diff_analysis/
+Plot_Rotor_Publ_Lanz_v002_250302              % 3) rotor figures      -> Fig_Rotor_*.png
 ```
 
-All figures are written as 300 DPI PNGs into the working directory (or, for the difference analysis, into a `diff_analysis/` subfolder).
+Step 1 must run before step 2, because the difference analysis also reads the
+images written by step 1. Figures are exported as 300 dpi PNG files. The
+journal styling uses Times New Roman; if that font is missing, MATLAB uses a
+fallback and label widths change.
+
+The feature extraction (25 statistical, gradient and GLCM texture features) and
+the classifier comparison (SVM linear/RBF, decision tree, k-NN, bagged trees,
+leave-one-out cross-validation) in Sects. 4–6 of the paper are not part of this
+repository.
 
 ---
 
-## Reproducing the published figures
+## Notes on the data
 
-The publication figures are produced bit-for-bit by the scripts as supplied. Random seeds are not used. If you obtain different output, check:
-
-1. The data folder is the MATLAB working directory when the script starts (the scripts use `pwd` to locate the `.txt` files).
-2. Times New Roman is installed on the system, otherwise MATLAB falls back to a different font and label widths change.
-3. MATLAB version ≥ R2021a — earlier versions handle `xline`, `sgtitle` and `readmatrix` differently.
-
----
-
-## Data integrity
-
-- All `.txt` files are tab-separated UTF-8 with `***` header delimiters.
-- Decimal separator: **point** (`.`).
-- Line endings: Unix (`\n`) — Windows users opening the files in Notepad may see them as a single line, but MATLAB reads them correctly regardless.
-- No NaN or sentinel values are used; the scripts treat all-zero rows as background and exclude them from statistics.
+* `Feldmann_aufmagnetisiert_1.txt` (M1, re-magnetised) contains only 2,231
+  data rows, compared with 5,529 for all other magnet scans. The scan of this
+  magnet covers only part of the 24 × 14 mm area.
+* Zero rows (outside the magnet) are treated as background by the scripts.
 
 ---
 
 ## License
 
-CC-BY-4.0 LICENSE 
+* **Data** (`*.txt`): [CC0 1.0 Universal](LICENSE), public domain dedication.
+* **Scripts** (`*.m`): [MIT License](LICENSE-CODE).
 
----
+Citing the article is appreciated (see [`CITATION.cff`](CITATION.cff)). See also
+[`DISCLAIMER.md`](DISCLAIMER.md).
+
+## Related work
+
+S. Feldmann, M. Wiedenmann: *Biomechanical hardware-in-the-loop control concept
+for pedelec drivetrain testing.* Computer Science & Information Technology
+(CSIT), 15, 2025. http://aircconline.com/csit/papers/vol15/csit152506.pdf
+
+## Acknowledgement
+
+This work was carried out within the MagTwin sub-project of the SmartPro
+research alliance and the DiMa project at Aalen University, in cooperation
+with daum electronic GmbH, Fürth.
 
 ## Contact
 
-Prof. Dr.-Ing. Sebastian Feldmann, Aalen University, Germany, Mail: Sebastian.Feldmann@HS-Aalen.de
-
-Issues and pull requests are welcome through the GitHub issue tracker.
+Prof. Dr.-Ing. Sebastian Feldmann, Aalen University, Germany —
+Sebastian.Feldmann@HS-Aalen.de

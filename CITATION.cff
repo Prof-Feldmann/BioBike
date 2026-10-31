@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this data or these scripts, please cite the accompanying article."
+title: "BioBike: Magnetic field maps of pedelec drive magnets before and after endurance testing"
+version: 1.1.0
+date-released: 2026-10-31
+license: CC0-1.0
+repository-code: "https://github.com/Prof-Feldmann/BioBike"
+keywords: [magnetic field mapping, permanent magnets, NdFeB, non-destructive testing, PMSM, pedelec, e-bike, SVM]
+authors:
+  - family-names: Feldmann
+    given-names: Sebastian
+    affiliation: Aalen University
+    email: Sebastian.Feldmann@HS-Aalen.de
+  - family-names: Lanz
+    given-names: Maximilian
+    affiliation: Aalen University
+  - family-names: Wiedenmann
+    given-names: Matthias
+    affiliation: Aalen University
+preferred-citation:
+  type: article
+  title: "Non-Destructive Quality Assessment of Permanent Magnets in Pedelec Drive Systems via Magnetic Field Mapping and Support Vector Machine Classification"
+  year: 2026
+  authors:
+    - family-names: Feldmann
+      given-names: Sebastian
+    - family-names: Lanz
+      given-names: Maximilian
+    - family-names: Wiedenmann
+      given-names: Matthias

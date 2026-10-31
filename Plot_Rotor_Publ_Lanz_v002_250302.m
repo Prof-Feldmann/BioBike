@@ -1,11 +1,11 @@
 %  PROJECT
 %  -------
 %  Supplementary material to:
-%      Feldmann, S. et al. (2026). "<Non-Destructive Quality Assessment of Permanent Magnets in
+%      Feldmann, S., Lanz, M., Wiedenmann, M. (2026). "Non-Destructive Quality Assessment of Permanent Magnets in
 %      Pedelec Drive Systems via Magnetic Field Mapping and Support
-%      Vector Machine Classification>",
-%      Springer Nature, Vol(Issue), pp. xxx-xxx. DOI: 10.xxxx/xxxxx
-%  Repository: https://github.com/<USERNAME>/BioBike
+%      Vector Machine Classification",
+%      submitted 2026. DOI: to be added after acceptance
+%  Repository: https://github.com/Prof-Feldmann/BioBike
 
 %% rotor_slice_visualization.m
 % Publication-quality visualization of Rotor_slice.txt

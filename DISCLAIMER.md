@@ -39,4 +39,4 @@ These scripts rely on MathWorks® MATLAB® and may use functionality from the Im
 
 ## Licence
 
-The scripts are distributed under the licence specified in the `LICENSE` file at the root of this repository. In case of any apparent conflict between this disclaimer and the licence text, the licence text prevails for terms it explicitly covers; this disclaimer remains binding for everything else.
+The measurement data are distributed under CC0 1.0 (`LICENSE`) and the scripts under the MIT License (`LICENSE-CODE`). In case of any apparent conflict between this disclaimer and the licence text, the licence text prevails for terms it explicitly covers; this disclaimer remains binding for everything else.
